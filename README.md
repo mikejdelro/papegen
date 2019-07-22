@@ -8,6 +8,7 @@ Papegen is a batch file that automatically downloads and uses a binary of [Waifu
 Tested on Windows 10 1803, with PowerShell 10.0.17763.1
 
 nVidia GPU with CUDA and CUDNN installed (if this is not met, will use CPU0)
+Refer to this [guide](https://docs.nvidia.com/deeplearning/sdk/cudnn-install/index.html#install-windows) by nVidia to install CUDA and CUDNN.
 
 ## Attributions
 [Waifu2x-Caffe](https://github.com/lltcggie/waifu2x-caffe)
