@@ -1,10 +1,10 @@
 # papegen
 Wallpaper Resizer/Cropper
 
-# What is it?
+## What is it?
 Papegen is a batch file that automatically downloads and uses a binary of [Waifu2x-Caffe](https://github.com/lltcggie/waifu2x-caffe) and [ImageMagick](https://github.com/ImageMagick/ImageMagick) to automatically scale and resize images to wallpaper standard resolutions (currently 1920x1080, 1080x1920, 2560x1440 and 1440x2560).
 
-# Attributions
+## Attributions
 [Waifu2x-Caffe](https://github.com/lltcggie/waifu2x-caffe)
 本ソフトは、画像変換ソフトウェア「[waifu2x](https://github.com/nagadomi/waifu2x)」の変換機能のみを、
 [Caffe](http://caffe.berkeleyvision.org/)を用いて書き直し、Windows向けにビルドしたソフトです。
