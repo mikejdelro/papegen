@@ -28,7 +28,7 @@ ECHO You have waifu2x-caffe.
     powershell -command "(New-Object System.Net.WebClient).DownloadFile('ftp://ftp.imagemagick.org/pub/ImageMagick/binaries/ImageMagick-7.0.8-56-portable-Q16-x64.zip', 'imagemagick.zip')"
     ::powershell Invoke-WebRequest -Uri "ftp://ftp.imagemagick.org/pub/ImageMagick/binaries/ImageMagick-7.0.8-56-portable-Q16-x64.zip" -OutFile "%cd%\imagemagick.zip"
     powershell Expand-Archive imagemagick.zip -DestinationPath %cd%\imagemagick
-    ECHO You now have imagemagick
+    ECHO You now have ImageMagick.
     del imagemagick.zip
 
 :hasim
@@ -94,19 +94,23 @@ if "%ERRORLEVEL%" == "1" (
     set img_tall=1
     set img_width=1080
     set img_height=1920
+    goto :resize
 )
 if "%ERRORLEVEL%" == "2" (
     set img_width=1920
     set img_height=1080
+    goto :resize
 )
 if "%ERRORLEVEL%" == "3" (
     set img_tall=1
     set img_width=2560
     set img_height=1440
+    goto :resize
 )
 if "%ERRORLEVEL%" == "4" (
     set img_width=1440
     set img_height=2560
+    goto :resize
 )
 if "%ERRORLEVEL%" == "5" (
     set has_extra=1
@@ -114,6 +118,7 @@ if "%ERRORLEVEL%" == "5" (
     set img_height=1080
     set img_width_extra=2560
     set img_height_extra=1440
+    goto :resize
 )
 if "%ERRORLEVEL%" == "6" (
     set img_tall=1
@@ -122,8 +127,10 @@ if "%ERRORLEVEL%" == "6" (
     set img_height=1080
     set img_width_extra=1440
     set img_height_extra=2560
+    goto :resize
 )
 
+:resize
 if %img_tall% == "1" (
     %cd%\waifu2x-caffe\waifu2x-caffe-cui.exe -t %tta_mode% -b 128 -d 16 -p %cudnn_mode% -h %img_height% -n 2 -m auto_scale -e png -o %cd%\input\temp -i %cd%\input
     %cd%\imagemagick\mogrify.exe %cd%\input\temp\*.png -background transparent -gravity center -extent %img_height%x%img_width% -format png *.png
