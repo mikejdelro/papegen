@@ -18,6 +18,7 @@ Refer to this [guide](https://docs.nvidia.com/deeplearning/sdk/cudnn-install/ind
 CPUで変換することも出来ますが、CUDA(あるいはcuDNN)を使うとCPUより高速に変換することが出来ます。
 
 ソフトのダウンロードは[こちらのreleasesページ](https://github.com/lltcggie/waifu2x-caffe/releases)の「Downloads」の項で出来ます。
+
 Waifu2x-Caffe uses [Caffe](https://caffe.berkeleyvision.org/); [CUDNN](https://developer.nvidia.com/cudnn) and [Waifu2x](https://github.com/nagadomi/waifu2x)'s existing models to image scale and noise reduce anime and manga style images.
 
 [ImageMagick](https://github.com/ImageMagick/ImageMagick)
