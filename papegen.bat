@@ -105,22 +105,26 @@ if "%ERRORLEVEL%" == "1" (
     set img_height=1920
     goto :resize
 )
+
 if "%ERRORLEVEL%" == "2" (
     set img_width=1920
     set img_height=1080
     goto :resize
 )
+
 if "%ERRORLEVEL%" == "3" (
     set img_tall=1
     set img_width=2560
     set img_height=1440
     goto :resize
 )
+
 if "%ERRORLEVEL%" == "4" (
     set img_width=1440
     set img_height=2560
     goto :resize
 )
+
 if "%ERRORLEVEL%" == "5" (
     set has_extra=1
     set img_width=1920
@@ -129,6 +133,7 @@ if "%ERRORLEVEL%" == "5" (
     set img_height_extra=1440
     goto :resize
 )
+
 if "%ERRORLEVEL%" == "6" (
     set img_tall=1
     set has_extra=1
