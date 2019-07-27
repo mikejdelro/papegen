@@ -1,6 +1,7 @@
 @ECHO OFF
 ::No clue what this does yet but it looks cool
 SETLOCAL ENABLEEXTENSIONS
+setlocal EnableDelayedExpansion
 
 ECHO Checking if you have waifu2x-caffe in %cd%\waifu2x-caffe
 if exist "%cd%\waifu2x-caffe\waifu2x-caffe-cui.exe" (
@@ -64,18 +65,18 @@ cls
     ECHO ==================================================
     ECHO Do you have CUDNN installed?
     SET /p cudnn_q="Y/N? " 
-    if %cudnn_q% == "Y" SET cudnn_mode=cudnn
-    if %cudnn_q% == "y" SET cudnn_mode=cudnn
-    if %cudnn_q% == "N" SET cudnn_mode=cpu
-    if %cudnn_q% == "n" SET cudnn_mode=cpu
+    if "%cudnn_q%" == "Y" SET cudnn_mode=cudnn
+    if "%cudnn_q%" == "y" SET cudnn_mode=cudnn
+    if "%cudnn_q%" == "N" SET cudnn_mode=cpu
+    if "%cudnn_q%" == "n" SET cudnn_mode=cpu
     cls
 
     ECHO Do you have wish to use TTA Mode? TTA mode will increase quality but will also increase render time.
     SET /p tta_q="Y/N? "
-    if %tta_q% == "Y" SET tta_mode=1
-    if %tta_q% == "y" SET tta_mode=1
-    if %tta_q% == "N" SET tta_mode=0
-    if %tta_q% == "n" SET tta_mode=0
+    if "%tta_q%" == "Y" SET tta_mode=1
+    if "%tta_q%" == "y" SET tta_mode=1
+    if "%tta_q%" == "N" SET tta_mode=0
+    if "%tta_q%" == "n" SET tta_mode=0
     cls
 
 ECHO MAIN MENU
@@ -92,7 +93,7 @@ ECHO ==================================================
     ECHO 7 - Configuration
     ECHO 8 - Open the online README
     ECHO 9 - Exit
-    choice /n /c:1234569 /M "Choose an option (1-9) "
+    choice /n /c:123456789 /M "Choose an option (1-9) "
 
 if "%ERRORLEVEL%" == "9" (
     goto :prog_exit
@@ -147,12 +148,13 @@ if "%ERRORLEVEL%" == "8" (
 )
 
 :resize
-if %img_tall% == "1" (
-    %cd%\waifu2x-caffe\waifu2x-caffe-cui.exe -t %tta_mode% -b 128 -d 16 -p %cudnn_mode% -h %img_height% -n 2 -m auto_scale -e png -o %cd%\output\temp -i %cd%\input
-    %cd%\imagemagick\mogrify.exe %cd%\output\temp\*.png -background transparent -gravity center -extent %img_height%x%img_width% -format png *.png
+ECHO "%tta_mode% %cudnn_mode% %img_width% %img_height%"
+if "%img_tall%" == "1" (
+    "%cd%\waifu2x-caffe\waifu2x-caffe-cui.exe" -t "%tta_mode%" -b 128 -d 16 -p "%cudnn_mode%" -h "%img_height%" -n 2 -m auto_scale -e png -o "%cd%\output\temp" -i "%cd%\input"
+    "%cd%\imagemagick\mogrify.exe" "%cd%\output\temp\*.png" -background transparent -gravity center -extent "%img_height%x%img_width%" -format png *.png
 ) else (
-    %cd%\waifu2x-caffe\waifu2x-caffe-cui.exe -t %tta_mode% -b 128 -d 16 -p %cudnn_mode% -w %img_width% -n 2 -m auto_scale -e png -o %cd%\output\temp -i %cd%\input
-    %cd%\imagemagick\mogrify.exe %cd%\output\temp\*.png -background transparent -gravity center -extent %img_height%x%img_width% -format png *.png
+    "%cd%\waifu2x-caffe\waifu2x-caffe-cui.exe" -t "%tta_mode%" -b 128 -d 16 -p "%cudnn_mode%" -w "%img_width%" -n 2 -m auto_scale -e png -o "%cd%\output\temp" -i "%cd%\input"
+    "%cd%\imagemagick\mogrify.exe" "%cd%\output\temp\*.png" -background transparent -gravity center -extent "%img_height%x%img_width%" -format png *.png
 )
 
 :prog_exit
